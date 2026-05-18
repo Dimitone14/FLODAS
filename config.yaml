@@ -2,12 +2,10 @@
 # This file must be in the same folder as FLODAS.py.
 
 model:
-  # Leave empty if there is exactly one .pth file in this folder.
-  # If several .pth files are present, set the exact filename here, for example:
-  # weights_filename: unet_best.pth
+  # Generally leave empty, unless having more than one .pth files in folder.
   weights_filename: ""
 
-# Tiled inference settings
+# Tile settings
 tiling:
   tile_size: 256
   stride: 128
@@ -31,15 +29,15 @@ postprocessing:
   fill_holes: true
   min_hole_px: 768
 
-# Probability isobands derived from the raw soft-probability raster
+# Probability isobands derived from soft probability raster
 isobands:
-  enabled: true
+  enabled: false
   min_prob: 0.10
   step: 0.10
 
-# Output toggles. Outputs are always written beside the input raster.
+# Output toggles. Outputs are written beside the input raster.
 outputs:
   write_probability: true
-  write_binary_mask: true
+  write_binary_mask: false
   write_vectors: true
   write_excluded: false
