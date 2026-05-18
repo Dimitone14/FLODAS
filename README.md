@@ -1,6 +1,6 @@
 # FLODAS
 
-FLODAS is a UNET prediction model for detecting floating matter-loaded windrows in coastal scenes on 8-band Planet SuperDove imagery.
+FLODAS is a UNET model for detecting floating matter-loaded windrows in coastal scenes on 8-band Planet SuperDove imagery.
 
 The model has been trained on multiple scenes from the North Eastern Mediterranean (Aegean Sea and Sea of Marmara) containing various floating matter instances (post-flooding debris, 
 marine mucilage, pollen, artificial floating targets).
