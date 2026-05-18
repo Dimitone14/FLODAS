@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-FLODAS full-scene inference for 1-class UNet segmentation on Planet SuperDove 8-band GeoTIFFs.
+FLODAS UNet full-scene inference on Planet SuperDove 8-band GeoTIFFs.
 
 Expected folder layout:
     FLODAS.py
     model_unet.py
     config.yaml
-    *.pth  (trained model weights; exactly one .pth file unless weights_filename is set in config.yaml)
+    *.pth  (trained model weights normally FLODAS_UNET_CC-BY-NC-4.0 from Zenodo record. One .pth file unless otherwise specified in config.yaml)
 
 Basic usage:
     python FLODAS.py path/to/scene.tif
 
-Outputs are written to the same folder as the input raster.
+Outputs are written in same folder as the input raster.
 """
 
 from __future__ import annotations
@@ -61,8 +61,6 @@ STD_VALS = np.array(
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "model": {
-        # Leave empty to auto-detect the only .pth file in the same folder as FLODAS.py.
-        # Set this if several .pth files are present.
         "weights_filename": "",
     },
     "tiling": {
@@ -93,11 +91,6 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "write_excluded": True,
     },
 }
-
-
-# -----------------------------------------------------------------------------
-# Config and CLI
-# -----------------------------------------------------------------------------
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -191,11 +184,6 @@ def resolve_weights_path(cfg: dict[str, Any]) -> Path:
         )
     return candidates[0]
 
-
-# -----------------------------------------------------------------------------
-# Raster and model utilities
-# -----------------------------------------------------------------------------
-
 def clean_model_stem(weights_path: Path) -> str:
     stem = weights_path.stem
     return stem.replace("unet_", "")
@@ -265,11 +253,6 @@ def distance_border_exclusion(valid_mask: np.ndarray, edge_buffer_px: int) -> np
     inside = valid_mask & (dist_in < edge_buffer_px)
     outside = (~valid_mask) & (dist_out < edge_buffer_px)
     return inside | outside
-
-
-# -----------------------------------------------------------------------------
-# Inference and post-processing
-# -----------------------------------------------------------------------------
 
 def fuse_soft_probs(
     src: rasterio.DatasetReader,
@@ -376,11 +359,6 @@ def apply_postprocessing(
     binary[~valid_mask] = 0
     excluded_total = excluded_small | excluded_border
     return binary, excluded_total
-
-
-# -----------------------------------------------------------------------------
-# Vectorization and outputs
-# -----------------------------------------------------------------------------
 
 def export_excluded(mask_bool: np.ndarray, reason: str, transform, crs) -> gpd.GeoDataFrame | None:
     mask_u8 = mask_bool.astype(np.uint8)
@@ -491,11 +469,6 @@ def save_binary_raster(output_path: Path, profile: dict[str, Any], binary: np.nd
         dst.write(binary.astype(np.uint8), 1)
 
     print(f"[OK] Final binary mask saved: {output_path}")
-
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
 
 def main() -> None:
     args = parse_args()
