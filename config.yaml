@@ -1,0 +1,45 @@
+# FLODAS UNet inference settings.
+# This file must be in the same folder as FLODAS.py.
+
+model:
+  # Leave empty if there is exactly one .pth file in this folder.
+  # If several .pth files are present, set the exact filename here, for example:
+  # weights_filename: unet_best.pth
+  weights_filename: ""
+
+# Tiled inference settings
+tiling:
+  tile_size: 256
+  stride: 128
+  nodata_tile_frac: 0.9
+
+# Post-processing settings
+postprocessing:
+  threshold: 0.90
+  min_object_size: 50
+  edge_buffer_px: 50
+
+  # Smooth probability raster before thresholding
+  apply_gaussian: true
+  gauss_sigma: 1.0
+
+  # Smooth final binary mask edges using morphological closing
+  apply_morph_smoothing: true
+  morph_size: 3
+
+  # Fill small holes inside detected polygons
+  fill_holes: true
+  min_hole_px: 768
+
+# Probability isobands derived from the raw soft-probability raster
+isobands:
+  enabled: true
+  min_prob: 0.10
+  step: 0.10
+
+# Output toggles. Outputs are always written beside the input raster.
+outputs:
+  write_probability: true
+  write_binary_mask: true
+  write_vectors: true
+  write_excluded: false

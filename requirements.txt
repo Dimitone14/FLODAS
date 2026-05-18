@@ -1,0 +1,8 @@
+numpy
+rasterio
+geopandas
+shapely
+scikit-image
+scipy
+PyYAML
+torch
