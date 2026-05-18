@@ -126,7 +126,7 @@ For an input raster named:
 raster.tif
 ```
 
-the outputs will have names similar to:
+the outputs will have names to:
 
 ```text
 raster_unet_FLODAS_YYYYMMDD-HHMM_prob.tif
