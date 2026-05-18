@@ -227,7 +227,7 @@ __marimo__/
 *.tif
 *.tiff
 
-# Shapefile / vector data should not be committed unless intentionally added
+# Shapefile data not committed unless added
 *.shp
 *.shx
 *.dbf
