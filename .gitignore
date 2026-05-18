@@ -216,3 +216,32 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+#--------------------------------------------------------------------------
+# Model weights are distributed separately through Zenodo
+*.pth
+*.pt
+*.ckpt
+
+# Large raster data should not be committed
+*.tif
+*.tiff
+
+# Shapefile / vector data should not be committed unless intentionally added
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.qmd
+
+# FLODAS output rasters and vectors
+*_prob.tif
+*_thr*.tif
+*_excluded-*
+*_isobands_*
+
+# Common geospatial sidecar files
+*.aux.xml
+*.ovr
+*.xml
