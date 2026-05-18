@@ -55,6 +55,9 @@ For GPU support, install the appropriate PyTorch version for your CUDA setup bef
 
 ## Running FLODAS
 
+Download model weights and full-scene evalutation data from Zenodo release: https://doi.org/10.5281/zenodo.20275122.
+Add the model .pth file to the FLODAS folder.
+
 From inside the FLODAS folder, run:
 
 ```powershell
@@ -66,12 +69,12 @@ The script automatically looks for the following files in the same folder as `FL
 ```text
 model_unet.py
 config.yaml
-*.pth
+FLODAS_UNET_CC-BY-NC-4.0.pth
 ```
 
 If there is only one `.pth` file in the folder, it will be used automatically.
 
-If there are multiple `.pth` files, set the desired filename in `config.yaml`.
+If for any reason there are multiple `.pth` files, set the desired filename in `config.yaml`.
 
 ---
 
