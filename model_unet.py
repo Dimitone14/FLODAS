@@ -1,14 +1,8 @@
 # models_unet.py
 """
 UNet model definition for 8-band PlanetScope segmentation.
-
-This file is intentionally minimal:
 - Only imports torch / torch.nn
-- No training-time dependencies (albumentations, sklearn, matplotlib, etc.)
-
-Use this in both training and inference, e.g.:
-
-    from models_unet import UNet
+- No training dependencies
 """
 
 import torch
